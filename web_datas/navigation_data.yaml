@@ -1,0 +1,120 @@
+---
+navidata:
+  - case: 验证基本配置中配置时间与名称页面打开与关闭
+    data:
+      move: base_loc
+      click: base_loc
+    expected:
+      labelname: base_tab_loc
+      labelstr: 基本配置
+
+  - case: 验证网络管理中DHCPRelay页面打开与关闭
+    data:
+      move: network_loc
+      click: DHCPRelay_loc
+    expected:
+      labelname: DHCPRelay_tab_loc
+      labelstr: DHCP Relay
+
+  - case: 验证网络管理中VLAN管理页面打开与关闭
+    data:
+      move: network_loc
+      click: VLAN_loc
+    expected:
+      labelname: VLAN_tab_loc
+      labelstr: VLAN管理
+
+  - case: 验证网络管理中静态路由管理页面打开与关闭
+    data:
+      move: network_loc
+      click: StaticRoute_loc
+    expected:
+      labelname: StaticRoute_tab_loc
+      labelstr: 静态路由管理
+
+  - case: 验证网络管理中内置Provisioning管理页面打开与关闭
+    data:
+      move: network_loc
+      click: LPDHCP_loc
+    expected:
+      labelname: LPDHCP_tab_loc
+      labelstr: 内置Provisioning管理
+
+  - case: 验证网络管理中组播管理页面打开与关闭
+    data:
+      move: network_loc
+      click: Mcast_loc
+    expected:
+      labelname: Mcast_tab_loc
+      labelstr: 组播管理
+
+  - case: 验证射频配置中状态信息页面打开与关闭
+    data:
+      move: RF_loc
+      click: RfStatus_loc
+    expected:
+      labelname: RfStatus_tab_loc
+      labelstr: 状态信息
+
+  - case: 验证射频配置中自动跳频页面打开与关闭
+    data:
+      move: RF_loc
+      click: specGroup_loc
+    expected:
+      labelname: specGroup_tab_loc
+      labelstr: 自动跳频
+
+  - case: 验证射频配置中上行信道配置页面打开与关闭
+    data:
+      move: RF_loc
+      click: USChannel_loc
+    expected:
+      labelname: USChannel_tab_loc
+      labelstr: 上行信道配置
+
+  - case: 验证射频配置中下行信道配置页面打开与关闭
+    data:
+      move: RF_loc
+      click: DSChannel_loc
+    expected:
+      labelname: DSChannel_tab_loc
+      labelstr: 下行信道配置
+
+  - case: 验证终端设备管理中CM和CPE列表页面打开与关闭
+    data:
+      move: TerminalDev_loc
+      click: CMCPEList_loc
+    expected:
+      labelname: CMCPEList_tab_loc
+      labelstr: CM/CPE列表
+
+  - case: 验证终端设备管理中CM列表页面打开与关闭
+    data:
+      move: TerminalDev_loc
+      click: CMList_loc
+    expected:
+      labelname: CMList_tab_loc
+      labelstr: CM列表
+
+  - case: 验证日志查看中日志记录页面打开与关闭
+    data:
+      move: logView_loc
+      click: logView_loc
+    expected:
+      labelname: logView_tab_loc
+      labelstr: 日志查看
+
+navi_switchdata:
+  - case: 验证导航页面能够切换到高级菜单
+    data:
+      click: detail_SiwitchButton
+    expected:
+      labelname: basic_SiwitchButton
+      labelstr: 基本菜单
+
+  - case: 验证高级菜单能够切换到导航页面
+    data:
+      click: basic_SiwitchButton
+    expected:
+      labelname: detail_SiwitchButton
+      labelstr: 高级菜单

@@ -1,0 +1,20 @@
+---
+aaa:
+  - username: admin
+    password: 123456
+
+  - username: admin
+    password:
+
+  - username: admin
+    password: admin
+
+bbb:
+  - username: admin
+    password: 123456
+
+  - username: admin
+    password:
+
+  - username: admin
+    password: admin

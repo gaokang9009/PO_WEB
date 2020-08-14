@@ -1,0 +1,6 @@
+---
+menudata:
+  - case: 设备快照,基本配置,SNMP配置,零配置,文件管理,网络配置,端口限速,DHCP Relay,VLAN管理,子网VLAN管理,ACL管理,静态路由管理,SAV管理,防火墙,内置Provisioning管理,安全加密管理,组播管理,上行信道配置,下行信道配置,自动跳频,绑定组配置,语音流配置,OFDMA信道,OFDM信道,节目流映射,节目流信,全局配置,信道配置,CM/CPE列表,CM列表,CM Flap列表,CM上下线告警,RemoteQuery配置,DOCSIS3.0配置,负载均衡管理,Piggyback配置,Shared Secret,UDC配置,CM离散度统计,CM访问控制列表管理,Service Class,信道流量监控,上行信号质量监控,上联口监控,频谱,温度监控,光模块监控,光机管理,日志配置,阈值配置,日志查看,Trap服务器,Syslog服务器,事件等级,用户管理,用户组管理,用户登录参数,AAA,web代理,web访问
+    data:
+    expected:
+
