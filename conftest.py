@@ -11,9 +11,13 @@ custom define hook function
 import os
 import pytest
 import utils
+import allure
 from utils import commlib
 from selenium import webdriver
 from web_pages.LoginPage import LoginPage
+
+
+driver = None
 
 
 def pytest_addoption(parser):
@@ -39,11 +43,12 @@ def env(request):
 
 @pytest.fixture(scope="session")
 def base_info(env):
+    global driver
     global_config = env
     base_url = global_config.get_config_data('host', 'url')
     page_titie = global_config.get_config_data('init', 'page_title')
     web_driver = global_config.get_config_data('init', 'webdriver')
-    print(f'base_info 的base_url是{base_url}!')
+    print(f'base_info 的 base_url是{base_url}!')
     if web_driver.upper() == 'FIREFOX':
         driver = webdriver.Firefox()
     elif web_driver.upper() == 'IE':
@@ -51,6 +56,33 @@ def base_info(env):
     else:
         driver = webdriver.Chrome()
     return driver, base_url, page_titie
+
+
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    """
+    获取每个用例状态的钩子函数
+    :param item:
+    :param call:
+    :return:
+    """
+    # 获取钩子方法的调用结果
+    outcome = yield
+    rep = outcome.get_result()
+    # 仅仅获取用例call 执行结果是失败的情况, 不包含 setup/teardown
+    if rep.when == "call" and rep.failed:
+        failure_cases = os.path.join(utils.REPORTTPATH, "failure_cases")
+        mode = "a" if os.path.exists(failure_cases) else "w"
+        with open(failure_cases, mode) as f:
+            # let's also access a fixture for the fun of it
+            if "tmpdir" in item.fixturenames:
+                extra = " (%s)" % item.funcargs["tmpdir"]
+            else:
+                extra = ""
+            f.write(rep.nodeid + extra + "\n")
+        # 添加allure报告截图
+        with allure.step('添加失败截图'):
+            allure.attach(driver.get_screenshot_as_png(), "失败截图", allure.attachment_type.PNG)
 
 
 @pytest.fixture(scope="class")

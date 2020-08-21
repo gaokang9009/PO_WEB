@@ -9,6 +9,7 @@ Project description：
 """
 
 import pytest
+import allure
 from utils import commlib
 from web_pages.MenuPage import MenuPage
 
@@ -31,21 +32,6 @@ def menu_page(login_main_page):
 
 
 class TestMenu(object):
-    # def test_menu(self, menu_page):
-    #     """测试web menu中各模块能够打开和关闭"""
-    #     Menu, ele_dict, menus = menu_page
-    #     # for menu in menus:
-    #     for menu in ele_dict['eles']():
-    #         menux = menu.find_element(*Menu.menu_loc_name)
-    #         Menu.open_tab(menu)
-    #         print(f'打开"{menux.text}"模块页面')
-    #         Menu.force_wait(3)
-    #         if menux.text == '设备快照':
-    #             continue
-    #         assert menux.text == Menu.ele_text(Menu.menu_tab_loc),
-    #         f'打开menu模块，预期标题为{menux.text}，实际标题为{Menu.ele_text(Menu.menu_tab_loc)}'
-    #         Menu.close_tab()
-    #         print(f'关闭"{menux.text}"模块页面')
 
     @pytest.mark.parametrize('data', menudata_datas, ids=menudata_ids)
     def test_menu(self, menu_page, data):
@@ -53,10 +39,13 @@ class TestMenu(object):
         Menu, ele_dict, menus = menu_page
         ele = menus[data]
         menux = ele.find_element(*Menu.menu_loc_name)
-        Menu.open_tab(ele)
+        with allure.step(f"step1：打开{menux.text}页面"):
+            Menu.open_tab(ele)
         Menu.force_wait(3)
-        assert menux.text == Menu.ele_text(Menu.menu_tab_loc), f'打开menu模块，预期标题为{menux.text}，实际标题为{Menu.ele_text(Menu.menu_tab_loc)}'
-        Menu.close_tab()
+        with allure.step('检测打开的页面标题文本信息正确'):
+            assert menux.text == Menu.ele_text(Menu.menu_tab_loc), f'打开menu模块，预期标题为{menux.text}，实际标题为{Menu.ele_text(Menu.menu_tab_loc)}'
+        with allure.step(f"step1：关闭{menux.text}页面"):
+            Menu.close_tab()
 
 
 if __name__ == "__main__":

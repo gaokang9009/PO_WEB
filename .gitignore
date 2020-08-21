@@ -91,6 +91,7 @@ venv.bak/
 reports_2020*/
 # allure_result/
 *result.json
+*container.json
 # html_report/
 reports_2020*.html
 # report/screen_shot/
