@@ -58,35 +58,9 @@ def base_info(env):
     return driver, base_url, page_titie
 
 
-@pytest.hookimpl(tryfirst=True, hookwrapper=True)
-def pytest_runtest_makereport(item, call):
-    """
-    获取每个用例状态的钩子函数
-    :param item:
-    :param call:
-    :return:
-    """
-    # 获取钩子方法的调用结果
-    outcome = yield
-    rep = outcome.get_result()
-    # 仅仅获取用例call 执行结果是失败的情况, 不包含 setup/teardown
-    if rep.when == "call" and rep.failed:
-        failure_cases = os.path.join(utils.REPORTTPATH, "failure_cases")
-        mode = "a" if os.path.exists(failure_cases) else "w"
-        with open(failure_cases, mode) as f:
-            # let's also access a fixture for the fun of it
-            if "tmpdir" in item.fixturenames:
-                extra = " (%s)" % item.funcargs["tmpdir"]
-            else:
-                extra = ""
-            f.write(rep.nodeid + extra + "\n")
-        # 添加allure报告截图
-        with allure.step('添加失败截图'):
-            allure.attach(driver.get_screenshot_as_png(), "失败截图", allure.attachment_type.PNG)
-
-
 @pytest.fixture(scope="class")
 def init_login_info(env):
+    global driver
     global_config = env
     base_url = global_config.get_config_data('host', 'url')
     page_titie = global_config.get_config_data('init', 'page_title')
@@ -105,8 +79,8 @@ def init_login_info(env):
 
 @pytest.fixture(scope='class')
 def login_web_class(init_login_info):
-    driver, base_url, page_title, username, password = init_login_info
-    login_page = LoginPage(driver, base_url, page_title)
+    driver_x, base_url, page_title, username, password = init_login_info
+    login_page = LoginPage(driver_x, base_url, page_title)
     login_page.login_just(username, password)
     yield login_page.driver, login_page.base_url, login_page.page_title
     login_page.quit()
@@ -114,8 +88,8 @@ def login_web_class(init_login_info):
 
 @pytest.fixture(scope='class')
 def login_main_page(init_login_info):
-    driver, base_url, page_title, username, password = init_login_info
-    login_page = LoginPage(driver, base_url, page_title)
+    driver_x, base_url, page_title, username, password = init_login_info
+    login_page = LoginPage(driver_x, base_url, page_title)
     login_page.login_just(username, password)
     login_page.ele_click(login_page.detail_siwitch)
     yield login_page.driver, login_page.base_url, login_page.page_title
@@ -124,11 +98,38 @@ def login_main_page(init_login_info):
 
 @pytest.fixture()
 def login_web_func(init_login_info):
-    driver, base_url, page_title, username, password = init_login_info
-    login_page = LoginPage(driver, base_url, page_title)
+    driver_x, base_url, page_title, username, password = init_login_info
+    login_page = LoginPage(driver_x, base_url, page_title)
     login_page.login_just(username, password)
     yield login_page.driver, login_page.base_url, login_page.page_title
     login_page.quit()
+
+
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    """
+    获取每个用例状态的钩子函数，对于失败的用例进行记录和截图
+    :param item:
+    :param call:
+    :return: None
+    """
+    # 获取钩子方法的调用结果
+    outcome = yield
+    rep = outcome.get_result()
+    # 仅仅获取用例call执行结果是失败的情况,不包含 setup/teardown
+    if rep.when == "call" and rep.failed:
+        failure_cases = os.path.join(utils.REPORTTPATH, "failure_cases")
+        mode = "a" if os.path.exists(failure_cases) else "w"
+        with open(failure_cases, mode) as f:
+            # let's also access a fixture for the fun of it
+            if "data" in item.fixturenames:
+                extra = ",具体参数为:(%s)" % item.funcargs["data"]
+            else:
+                extra = ""
+            f.write(rep.nodeid + extra + "\n")
+        # 添加allure报告截图
+        with allure.step('添加失败截图'):
+            allure.attach(driver.get_screenshot_as_png(), "失败截图", allure.attachment_type.PNG)
 
 
 if __name__ == "__main__":

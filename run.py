@@ -34,13 +34,13 @@ def start_run():
     :return:
     """
     report_opt = get_report_opt()
-    # allure_results_path = os.path.join(ALLURERESULTTPATH,  'results_'+time.strftime('%Y%m%d%H%M%S'))
+    # allure_results_path = os.path.join(ALLURERESULTTPATH,  'result_'+time.strftime('%Y%m%d%H%M%S'))
+    # allure_reports_path = os.path.join(ALLUREREPORTPATH, 'report'+time.strftime('%Y%m%d%H%M%S'))
     allure_report_name = os.path.join(ALLUREREPORTPATH,  'reports_'+time.strftime('%Y%m%d%H%M%S'))
-    html_reeport_name = os.path.join(HTMLREPORTTPATH,  'reports_'+time.strftime('%Y%m%d%H%M%S') + '.html')
-    # allure_reports_path = os.path.join(ROOTPATH, 'allure_reports')
+    html_report_name = os.path.join(HTMLREPORTTPATH,  'reports_'+time.strftime('%Y%m%d%H%M%S') + '.html')
     allure_cmd_list = ['pytest {} --alluredir {} --clean-alluredir'.format(CASEPATH, ALLURERESULTTPATH),
                        'allure generate {} -o {}'.format(ALLURERESULTTPATH, allure_report_name)]
-    html_cmd_list = ['pytest {} --html={} --self-contained-html'.format(CASEPATH, html_reeport_name)]
+    html_cmd_list = ['pytest {} --html={} --self-contained-html'.format(CASEPATH, html_report_name)]
     # 'allure open {}'.format(allure_reports_path)
     if report_opt == 'html':
         exec_list = html_cmd_list

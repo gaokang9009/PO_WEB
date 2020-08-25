@@ -6,7 +6,7 @@ navidata:
       click: base_loc
     expected:
       labelname: base_tab_loc
-      labelstr: 基本配置
+      labelstr: 基本配置x
 
   - case: 验证网络管理中DHCPRelay页面打开与关闭
     data:
