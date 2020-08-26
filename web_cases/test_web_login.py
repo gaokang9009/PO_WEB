@@ -10,6 +10,7 @@ Project description：
 
 import allure
 import pytest
+from pytest import assume
 from utils import commlib
 from utils.web_assert import *
 from web_pages.LoginPage import LoginPage
@@ -59,7 +60,8 @@ class TestLogin(object):
         with allure.step("step1：点击关于web链接"):
             login_page.about_show()
         with allure.step("step2：验证关于web信息框被打开"):
-            assert login_page.find_element(*login_page.about_frame) is not None, 'about信息框未被成功打开'
+            with assume:
+                assert login_page.find_element(*login_page.about_frame) is not None, 'about信息框未被成功打开'
         with allure.step("step3：关闭关于web窗口"):
             login_page.about_close()
         with allure.step("step4：验证关于web信息框被关闭"):
@@ -76,7 +78,8 @@ class TestLogin(object):
         with allure.step("step2：点击用户许可协议链接"):
             login_page.license_show()
         with allure.step("step3：验证用户许可协议标题与预期一致"):
-            assert '用户许可协议' in login_page.driver.title, f'预期用户许可协议页面title为"用户许可协议"，实际title为{login_page.driver.title}'
+            with assume:
+                assert '用户许可协议' in login_page.driver.title, f'预期用户许可协议页面title为"用户许可协议"，实际title为{login_page.driver.title}'
         with allure.step("step4：关闭用户许可协议page"):
             login_page.license_close()
             login_page.force_wait(1)

@@ -3,3 +3,6 @@ web_cases/test_web_login.py::TestLogin::test_login[用户名与密码匹配时测试web登陆
 web_cases/test_web_login.py::TestLogin::test_login[用户名与密码匹配时测试web登陆成功],具体参数为:({'username': 'gaokang', 'password': 'admin'})
 web_cases/test_web_navigation.py::TestNavigation::test_navigation_tab[验证基本配置中配置时间与名称页面打开与关闭],具体参数为:({'move': 'base_loc', 'click': 'base_loc'})
 web_cases/test_web_navigation.py::TestNavigation::test_navigation_tab[验证网络管理中DHCPRelay页面打开与关闭],具体参数为:({'move': 'network_loc', 'click': 'DHCPRelay_loc'})
+web_cases/test_web_navigation.py::TestNavigation::test_navigation_tab[验证基本配置中配置时间与名称页面打开与关闭],具体参数为:({'move': 'base_loc', 'click': 'base_loc'})
+web_cases/test_web_login.py::TestLogin::test_login[用户名与密码匹配时测试web登陆成功],具体参数为:({'username': 'gaokang', 'password': 'admin'})
+web_cases/test_web_navigation.py::TestNavigation::test_navigation_tab[验证基本配置中配置时间与名称页面打开与关闭],具体参数为:({'move': 'base_loc', 'click': 'base_loc'})

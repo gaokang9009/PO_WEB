@@ -9,6 +9,7 @@ Project description：
 """
 
 import allure
+from pytest import assume
 import pytest
 import allure
 from utils import commlib
@@ -46,8 +47,9 @@ class TestMenu(object):
             menu.open_tab(ele)
         menu.force_wait(3)
         with allure.step('step2：验证打开的table标题文本信息与预期一致'):
-            assert menu_x.text == menu.ele_text(menu.menu_tab_loc), f'打开menu模块,预期标题为{menu_x.text},' \
-                f'实际标题为{menu.ele_text(menu.menu_tab_loc)}'
+            with assume:
+                assert menu_x.text == menu.ele_text(menu.menu_tab_loc), f'打开menu模块,预期标题为{menu_x.text},' \
+                    f'实际标题为{menu.ele_text(menu.menu_tab_loc)}'
         with allure.step(f"step3：关闭{menu_x.text}页面"):
             menu.close_tab()
 

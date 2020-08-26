@@ -9,6 +9,7 @@ Project description：
 """
 
 import allure
+from pytest import assume
 import pytest
 from utils import commlib
 from web_pages.NavigationPage import NavigationPage
@@ -47,7 +48,8 @@ class TestNavigation(object):
         navigation_page.force_wait(3)
         label_now_str = navigation_page.tab_txt(label_ele)
         with allure.step("step2：验证打开的table标题文本信息与预期一致"):
-            assert label_now_str == label_str, f'打开导航中模块，预期标题为{label_str}，实际标题为{label_now_str}'
+            with assume:
+                assert label_now_str == label_str, f'打开导航中模块，预期标题为{label_str}，实际标题为{label_now_str}'
         with allure.step(f"step3：关闭{label_str}页面"):
             navigation_page.close_tab()
 

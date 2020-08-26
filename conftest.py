@@ -109,15 +109,16 @@ def login_web_func(init_login_info):
 def pytest_runtest_makereport(item, call):
     """
     获取每个用例状态的钩子函数，对于失败的用例进行记录和截图
-    :param item:
-    :param call:
+    :param item: 测试用例
+    :param call: 测试步骤
     :return: None
     """
     # 获取钩子方法的调用结果
     outcome = yield
-    rep = outcome.get_result()
+    report = outcome.get_result()
     # 仅仅获取用例call执行结果是失败的情况,不包含 setup/teardown
-    if rep.when == "call" and rep.failed:
+    # if report.when == "call" and report.failed:
+    if report.when == "call" and report.outcome == "failed":
         failure_cases = os.path.join(utils.REPORTTPATH, "failure_cases")
         mode = "a" if os.path.exists(failure_cases) else "w"
         with open(failure_cases, mode) as f:
@@ -126,7 +127,7 @@ def pytest_runtest_makereport(item, call):
                 extra = ",具体参数为:(%s)" % item.funcargs["data"]
             else:
                 extra = ""
-            f.write(rep.nodeid + extra + "\n")
+            f.write(report.nodeid + extra + "\n")
         # 添加allure报告截图
         with allure.step('添加失败截图'):
             allure.attach(driver.get_screenshot_as_png(), "失败截图", allure.attachment_type.PNG)
