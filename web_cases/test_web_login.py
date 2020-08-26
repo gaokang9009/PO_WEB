@@ -38,6 +38,7 @@ class TestLogin(object):
 
     @allure.feature("登录页面")
     @allure.story("web网页成功打开")
+    @pytest.mark.demo
     @pytest.mark.parametrize('case, data, expect', open_url_datas, ids=open_url_ids)
     def test_open_url(self, login_page, case, data, expect):
         """测试web页面正常打开"""
@@ -111,6 +112,7 @@ class TestLogin(object):
         with allure.step("step2：验证页面语言符合预期"):
             check_ele_info(login_page, ele_dict, expect, assert_type='in', assert_tip=None)
 
+    @pytest.mark.demo
     @allure.feature("登录页面")
     @allure.story("web登陆测试")
     @pytest.mark.parametrize('case, data, expect', login_datas, ids=login_ids)

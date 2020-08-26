@@ -53,6 +53,7 @@ class TestNavigation(object):
         with allure.step(f"step3：关闭{label_str}页面"):
             navigation_page.close_tab()
 
+    @pytest.mark.demo
     @allure.feature("导航页面")
     @allure.story("导航页面中高级菜单切换")
     @pytest.mark.parametrize('case, data, expect', navigation_switch_datas, ids=navigation_switch_ids)

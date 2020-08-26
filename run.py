@@ -42,10 +42,14 @@ def start_run():
                        'allure generate {} -o {}'.format(ALLURERESULTTPATH, allure_report_name)]
     html_cmd_list = ['pytest {} --html={} --self-contained-html'.format(CASEPATH, html_report_name)]
     # 'allure open {}'.format(allure_reports_path)
+    demo_cmd_list = ['pytest -m demo {} --alluredir {} --clean-alluredir'.format(CASEPATH, ALLURERESULTTPATH),
+                     'allure generate {} -o {}'.format(ALLURERESULTTPATH, allure_report_name)]
     if report_opt == 'html':
         exec_list = html_cmd_list
     elif report_opt == 'allure':
         exec_list = allure_cmd_list
+    elif report_opt == 'demo':
+        exec_list = demo_cmd_list
     else:
         exec_list = ['pytest {}'.format(CASEPATH)]
     commlib.excute_cmd_echo_out(exec_list)
