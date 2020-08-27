@@ -96,3 +96,5 @@ reports_2020*/
 reports_2020*.html
 # report/screen_shot/
 *.png
+# junit_result/
+*.xml
