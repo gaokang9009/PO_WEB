@@ -19,6 +19,8 @@ ALLUREREPORTPATH = utils.ALLUREREPORT
 HTMLREPORTTPATH = utils.HTMLREPORT
 CASEPATH = utils.CASEPATH
 JUNITRESULTPATH = utils.JUNITRESULT
+ALLUREENVPATH = utils.ALLUREENV
+ALLURERESULTENVPATH = utils.ALLURERESULTENV
 
 
 def get_report_opt():
@@ -41,11 +43,13 @@ def start_run():
     html_report_name = os.path.join(HTMLREPORTTPATH,  'reports_'+time.strftime('%Y%m%d%H%M%S') + '.html')
     junit_report_name = os.path.join(JUNITRESULTPATH,  'results.xml')
     allure_cmd_list = ['pytest {} --alluredir {} --clean-alluredir'.format(CASEPATH, ALLURERESULTTPATH),
+                       'copy {} {}'.format(ALLUREENVPATH, ALLURERESULTENVPATH),
                        'allure generate {} -o {}'.format(ALLURERESULTTPATH, allure_report_name)]
     # 'allure open {}'.format(allure_reports_path)
     html_cmd_list = ['pytest {} --html={} --self-contained-html'.format(CASEPATH, html_report_name)]
     junit_cmd_list = ['pytest -m demo {} --junitxml={}'.format(CASEPATH, junit_report_name)]
     demo_cmd_list = ['pytest -m demo {} --alluredir {} --clean-alluredir'.format(CASEPATH, ALLURERESULTTPATH),
+                     'copy {} {}'.format(ALLUREENVPATH, ALLURERESULTENVPATH),
                      'allure generate {} -o {}'.format(ALLURERESULTTPATH, allure_report_name)]
     if report_opt == 'html':
         exec_list = html_cmd_list
