@@ -11,6 +11,7 @@ Project description：
 import allure
 import pytest
 from pytest import assume
+from conftest import FailedCase
 from utils import commlib
 from utils.web_assert import *
 from web_pages.LoginPage import LoginPage
@@ -57,6 +58,8 @@ class TestLogin(object):
     @allure.story("关于web链接成功打开与关闭")
     def test_about_web(self, login_page):
         """测试web登陆页面中关于web系统正常开关"""
+        if getattr(FailedCase, 'test_open_url', False):
+            pytest.skip('test_open_url执行失败或被跳过，web网页打开失败，此用例跳过！')
         login_page, ele_dict = login_page
         with allure.step("step1：点击关于web链接"):
             login_page.about_show()
@@ -66,12 +69,15 @@ class TestLogin(object):
         with allure.step("step3：关闭关于web窗口"):
             login_page.about_close()
         with allure.step("step4：验证关于web信息框被关闭"):
-            assert login_page.find_element(*login_page.login_submit_loc) is not None, 'about信息框未被成功关闭'
+            # assert login_page.find_element(*login_page.login_submit_loc) is not None, 'about信息框未被成功关闭'
+            assert login_page.find_element(*login_page.login_submit_loc) is None, 'about信息框未被成功关闭'
 
     @allure.feature("登录页面")
     @allure.story("用户许可协议链接成功打开与关闭")
     def test_user_license(self, login_page):
         """测试web登陆页面用户许可协议正常开关"""
+        if getattr(FailedCase, 'test_about_web', False):
+            pytest.skip('test_about_web 执行失败或被跳过，web关于页面打开失败，此用例跳过！')
         login_page, ele_dict = login_page
         with allure.step("step1：点击关于web链接"):
             login_page.about_show()
@@ -104,6 +110,8 @@ class TestLogin(object):
     @pytest.mark.parametrize('case, data, expect', switch_language_datas, ids=switch_language_ids)
     def test_switch_language(self, login_page, case, data, expect):
         """测试web页面中英文正常切换"""
+        if getattr(FailedCase, 'test_open_url', False):
+            pytest.skip('test_open_url执行失败或被跳过，web网页打开失败，此用例跳过！')
         login_page, ele_dict = login_page
         click_ele = ele_dict[data['click']]
         with allure.step("step1：点击语言切换按钮"):
@@ -118,6 +126,8 @@ class TestLogin(object):
     @pytest.mark.parametrize('case, data, expect', login_datas, ids=login_ids)
     def test_login(self, login_page, case, data, expect):
         """测试web登陆页面用户登陆"""
+        if getattr(FailedCase, 'test_open_url', False):
+            pytest.skip('test_open_url执行失败或被跳过，web网页打开失败，此用例跳过！')
         login_page, ele_dict = login_page
         with allure.step("step1：获取测试的用户名和密码"):
             username = data['username']

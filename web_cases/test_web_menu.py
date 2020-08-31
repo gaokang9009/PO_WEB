@@ -33,6 +33,7 @@ def menu_page(login_main_page):
     yield menu_page, menu_page.ele_dict, menus
 
 
+@pytest.mark.usefixtures('check_login_ok')
 class TestMenu(object):
 
     @allure.feature("功能菜单页面")

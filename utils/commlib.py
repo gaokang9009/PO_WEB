@@ -9,8 +9,14 @@ Project description：定义工具函数
 
 import utils
 import os
+import time
 import configparser
 import yaml
+import smtplib
+from email.mime.text import MIMEText
+from email.header import Header
+from email.mime.application import MIMEApplication
+from email.mime.multipart import MIMEMultipart
 
 
 class Config(object):
@@ -118,15 +124,50 @@ def excute_cmd_echo_out(cmd_list):
     :param cmd_list:所需执行的命令列表
     :return:None
     """
+    cmd_result_path = os.path.join(utils.CMDRESULT, 'cmd_result.txt')
+    with open(cmd_result_path, mode='w') as f:
+        f.write('Result of CMD({}):\n\n'.format(time.strftime('%Y-%m-%d_%X')))
     for cmd in cmd_list:
         print(cmd)
+        with open(cmd_result_path, mode='a') as f:
+            f.write(cmd + '\n\n')
         with os.popen(cmd) as result:
             while True:
                 result_echo = result.read()
                 if result_echo:
                     print(result_echo)
+                    with open(cmd_result_path, mode='a') as f:
+                        f.write(result_echo + '\n\n')
                 else:
                     break
+
+
+def send_email(content_text, file_name):
+    smtp = smtplib.SMTP(host='192.168.1.11')
+    smtp.login(user='gaokangkang', password='gk40180')
+    # 构建一封多组件的邮件
+    msg = MIMEMultipart()
+    msg['From'] = "<gaokangkang@dvt.dvt.com>"
+    msg['To'] = "<gaokangkang@dvt.dvt.com>"
+    msg['Subject'] = Header("web自动化测试报告", charset='utf-8')
+    text_content = MIMEText('''Hi：
+     测试已完成；概要信息如下
+         {}
+    
+    CMD测试打印结果见附件；
+    
+    更详细的报告请查阅HTML或ALLURE系统报告；
+
+                    谢谢！'''.format(content_text), _charset='utf-8')
+    with open(file_name, 'rb') as f:
+        f_msg = f.read()
+    app = MIMEApplication(f_msg)
+    app.add_header('content-disposition', 'attachment', filename=os.path.split(file_name)[1])
+    msg.attach(text_content)
+    msg.attach(app)
+    smtp.send_message(msg=msg, from_addr="gaokangkang@dvt.dvt.com",
+                      to_addrs=['gaokangkang@dvt.dvt.com'])
+    smtp.quit()
 
 
 def main():

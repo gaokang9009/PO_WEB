@@ -9,6 +9,8 @@ custom define hook function
 """
 
 import os
+import re
+import time
 import pytest
 import utils
 import allure
@@ -18,6 +20,8 @@ from web_pages.LoginPage import LoginPage
 
 
 driver = None
+failure_cases = os.path.join(utils.REPORTTPATH, "failure_cases")
+result_statistics = {'all': 0, 'passed': 0, 'failed': 0, 'skipped': 0, 'xfail': 0, 'xpass': 0}
 
 
 def pytest_addoption(parser):
@@ -105,10 +109,34 @@ def login_web_func(init_login_info):
     login_page.quit()
 
 
+class FailedCase:
+    """
+    记录失败case
+    """
+    skip = False
+
+
+class ResultStatistics:
+    """
+    统计case结果
+    """
+    all = 0
+    passed = 0
+    failed = 0
+    skipped = 0
+
+
+@pytest.fixture(scope='session', autouse=True)
+def generate_failure_cases_file():
+    with open(failure_cases, mode='w') as f:
+        f.write('Failure cases({}):\n\n'.format(time.strftime('%Y-%m-%d_%X')))
+
+
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
 def pytest_runtest_makereport(item, call):
     """
-    获取每个用例状态的钩子函数，对于失败的用例进行记录和截图
+    result_statistics = {'all': 0, 'passed': 0, 'failed': 0, 'skipped': 0, 'xfail': 0, 'xpass': 0}
+    获取每个用例状态的钩子函数，对用例结果进行统计，并对于失败的用例进行记录和截图
     :param item: 测试用例
     :param call: 测试步骤
     :return: None
@@ -118,19 +146,44 @@ def pytest_runtest_makereport(item, call):
     report = outcome.get_result()
     # 仅仅获取用例call执行结果是失败的情况,不包含 setup/teardown
     # if report.when == "call" and report.failed:
-    if report.when == "call" and report.outcome == "failed":
-        failure_cases = os.path.join(utils.REPORTTPATH, "failure_cases")
-        mode = "a" if os.path.exists(failure_cases) else "w"
-        with open(failure_cases, mode) as f:
-            # let's also access a fixture for the fun of it
-            if "data" in item.fixturenames:
-                extra = ",具体参数为:(%s)" % item.funcargs["data"]
-            else:
-                extra = ""
-            f.write(report.nodeid + extra + "\n")
-        # 添加allure报告截图
-        with allure.step('添加失败截图'):
-            allure.attach(driver.get_screenshot_as_png(), "失败截图", allure.attachment_type.PNG)
+    global result_statistics
+    if report.when == "setup":
+        result_statistics['all'] += 1
+        ResultStatistics.all += 1
+        if report.outcome == 'skipped':
+            result_statistics['skipped'] += 1
+    if report.when == "call":
+        if report.outcome == 'passed':
+            result_statistics['passed'] += 1
+        if "data" in item.fixturenames:
+            extra = ",具体参数为:(%s)" % item.funcargs["data"]
+        else:
+            extra = ""
+        if report.outcome == 'skipped':
+            result_statistics['skipped'] += 1
+            with open(failure_cases, mode='a') as f:
+                f.write(report.nodeid + extra + ',result: call skipped! ' + "\n")
+        if report.outcome == 'failed':
+            result_statistics['failed'] += 1
+            # 添加allure报告截图
+            with allure.step('添加失败截图'):
+                allure.attach(driver.get_screenshot_as_png(), "失败截图", allure.attachment_type.PNG)
+            with open(failure_cases, mode='a') as f:
+                f.write(report.nodeid + extra + ',result: call failed! ' + "\n")
+    # print(result_statistics)
+    if report.when in ('call', 'setup') and report.outcome in ('failed', 'skipped'):
+        # 当某个用例失败时(setup失败也算)或被跳过时，将这个用例的执行结果存储在 Failed 类中
+        case_name = report.nodeid.split('::')[-1]
+        if 'web登陆成功' not in case_name:
+            case_name = re.sub(r'\[.*\]', '', report.nodeid.split('::')[-1])
+        setattr(FailedCase, case_name, True)
+
+
+@pytest.fixture(scope='class')
+def check_login_ok():
+    """测试web能够正常登陆"""
+    if getattr(FailedCase, 'test_login[用户名与密码匹配时测试web登陆成功]', False):
+        pytest.skip('"test_login[用户名与密码匹配时测试web登陆成功]"执行失败或被跳过，web登陆失败，此用例跳过！')
 
 
 if __name__ == "__main__":

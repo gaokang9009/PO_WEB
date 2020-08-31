@@ -31,6 +31,7 @@ def forcewait(navigation_page):
     navigationpage.force_wait(1)
 
 
+@pytest.mark.usefixtures('check_login_ok')
 class TestNavigation(object):
 
     @allure.feature("导航页面")

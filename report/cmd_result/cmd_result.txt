@@ -1,0 +1,193 @@
+Result of CMD(2020-08-31_15:24:11):
+
+pytest E:\CompanyDevice\PO_WEB\web_cases
+
+============================= test session starts =============================
+platform win32 -- Python 3.8.0, pytest-5.3.1, py-1.8.0, pluggy-0.13.1 -- d:\python38\python.exe
+cachedir: .pytest_cache
+metadata: {'Python': '3.8.0', 'Platform': 'Windows-7-6.1.7601-SP1', 'Packages': {'pytest': '5.3.1', 'py': '1.8.0', 'pluggy': '0.13.1'}, 'Plugins': {'allure-pytest': '2.8.16', 'assume': '2.2.1', 'html': '2.1.1', 'metadata': '1.9.0', 'ordering': '0.6', 'repeat': '0.8.0', 'rerunfailures': '9.0', 'sugar': '0.9.4', 'timeout': '1.4.2'}, 'JAVA_HOME': 'D:\\Program Files\\Java\\jdk1.8.0_231'}
+rootdir: E:\CompanyDevice\PO_WEB, inifile: pytest.ini
+plugins: allure-pytest-2.8.16, assume-2.2.1, html-2.1.1, metadata-1.9.0, ordering-0.6, repeat-0.8.0, rerunfailures-9.0, sugar-0.9.4, timeout-1.4.2
+collecting ... collected 84 items
+
+web_cases/test_web_login.py::TestLogin::test_open_url[测试web页面能够正常打开] base_info 的 base_url是http://172.16.36.202/!
+PASSED
+web_cases/test_web_login.py::TestLogin::test_about_web FAILED
+web_cases/test_web_login.py::TestLogin::test_user_license SKIPPED
+web_cases/test_web_login.py::TestLogin::test_switch_language[测试中文web切英文页面] PASSED
+web_cases/test_web_login.py::TestLogin::test_switch_language[测试英文web切中文页面] PASSED
+web_cases/test_web_login.py::TestLogin::test_login[用户名和密码为空时测试web登陆失败] PASSED
+web_cases/test_web_login.py::TestLogin::test_login[用户名存在且密码为空时测试web登陆失败] PASSED
+web_cases/test_web_login.py::TestLogin::test_login[用户名为空且密码存在时测试web登陆失败] PASSED
+web_cases/test_web_login.py::TestLogin::test_login[用户名与密码不匹配时测试web登陆失败] PASSED
+web_cases/test_web_login.py::TestLogin::test_login[用户名与密码匹配时测试web登陆成功] 定位方式 xpath->//*[@class="x-tab-strip-text icon_navigation"] 的元素未找到!
+FAILED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"基本配置"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"SNMP配置"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"零配置"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"文件管理"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"网络配置"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"端口限速"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"DHCP Relay"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"VLAN管理"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"子网VLAN管理"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"ACL管理"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"静态路由管理"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"SAV管理"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"防火墙"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"内置Provisioning管理"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"安全加密管理"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"组播管理"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"上行信道配置"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"下行信道配置"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"自动跳频"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"绑定组配置"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"语音流配置"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"OFDMA信道"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"OFDM信道"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"节目流映射"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"节目流信"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"全局配置"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"信道配置"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"CM/CPE列表"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"CM列表"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"CM Flap列表"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"CM上下线告警"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"RemoteQuery配置"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"DOCSIS3.0配置"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"负载均衡管理"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"Piggyback配置"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"Shared Secret"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"UDC配置"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"CM离散度统计"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"CM访问控制列表管理"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"Service Class"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"信道流量监控"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"上行信号质量监控"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"上联口监控"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"频谱"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"温度监控"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"光模块监控"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"光机管理"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"日志配置"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"阈值配置"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"日志查看"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"Trap服务器"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"Syslog服务器"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"事件等级"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"用户管理"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"用户组管理"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"用户登录参数"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"AAA"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"web代理"页面] SKIPPED
+web_cases/test_web_menu.py::TestMenu::test_menu[打开和关闭"web访问"页面] SKIPPED
+web_cases/test_web_navigation.py::TestNavigation::test_navigation_tab[验证基本配置中配置时间与名称页面打开与关闭] SKIPPED
+web_cases/test_web_navigation.py::TestNavigation::test_navigation_tab[验证网络管理中DHCPRelay页面打开与关闭] SKIPPED
+web_cases/test_web_navigation.py::TestNavigation::test_navigation_tab[验证网络管理中VLAN管理页面打开与关闭] SKIPPED
+web_cases/test_web_navigation.py::TestNavigation::test_navigation_tab[验证网络管理中静态路由管理页面打开与关闭] SKIPPED
+web_cases/test_web_navigation.py::TestNavigation::test_navigation_tab[验证网络管理中内置Provisioning管理页面打开与关闭] SKIPPED
+web_cases/test_web_navigation.py::TestNavigation::test_navigation_tab[验证网络管理中组播管理页面打开与关闭] SKIPPED
+web_cases/test_web_navigation.py::TestNavigation::test_navigation_tab[验证射频配置中状态信息页面打开与关闭] SKIPPED
+web_cases/test_web_navigation.py::TestNavigation::test_navigation_tab[验证射频配置中自动跳频页面打开与关闭] SKIPPED
+web_cases/test_web_navigation.py::TestNavigation::test_navigation_tab[验证射频配置中上行信道配置页面打开与关闭] SKIPPED
+web_cases/test_web_navigation.py::TestNavigation::test_navigation_tab[验证射频配置中下行信道配置页面打开与关闭] SKIPPED
+web_cases/test_web_navigation.py::TestNavigation::test_navigation_tab[验证终端设备管理中CM和CPE列表页面打开与关闭] SKIPPED
+web_cases/test_web_navigation.py::TestNavigation::test_navigation_tab[验证终端设备管理中CM列表页面打开与关闭] SKIPPED
+web_cases/test_web_navigation.py::TestNavigation::test_navigation_tab[验证日志查看中日志记录页面打开与关闭] SKIPPED
+web_cases/test_web_navigation.py::TestNavigation::test_navigation_switch[验证导航页面能够切换到高级菜单] SKIPPED
+web_cases/test_web_navigation.py::TestNavigation::test_navigation_switch[验证高级菜单能够切换到导航页面] SKIPPED
+
+================================== FAILURES ===================================
+__________________________ TestLogin.test_about_web ___________________________
+
+self = <test_web_login.TestLogin object at 0x00000000045D7DF0>
+login_page = <web_pages.LoginPage.LoginPage object at 0x0000000004613400>
+
+    @allure.feature("登录页面")
+    @allure.story("关于web链接成功打开与关闭")
+    def test_about_web(self, login_page):
+        """测试web登陆页面中关于web系统正常开关"""
+        if getattr(FailedCase, 'test_open_url', False):
+            pytest.skip('test_open_url执行失败或被跳过，web网页打开失败，此用例跳过！')
+        login_page, ele_dict = login_page
+        with allure.step("step1：点击关于web链接"):
+            login_page.about_show()
+        with allure.step("step2：验证关于web信息框被打开"):
+            with assume:
+                assert login_page.find_element(*login_page.about_frame) is not None, 'about信息框未被成功打开'
+        with allure.step("step3：关闭关于web窗口"):
+            login_page.about_close()
+        with allure.step("step4：验证关于web信息框被关闭"):
+            # assert login_page.find_element(*login_page.login_submit_loc) is not None, 'about信息框未被成功关闭'
+>           assert login_page.find_element(*login_page.login_submit_loc) is None, 'about信息框未被成功关闭'
+E           AssertionError: about信息框未被成功关闭
+E           assert <selenium.webdriver.remote.webelement.WebElement (session="b11ce160818b654266570e4890b1e751", element="4e22ab00-540b-468e-8ff9-9bbc95c92278")> is None
+E            +  where <selenium.webdriver.remote.webelement.WebElement (session="b11ce160818b654266570e4890b1e751", element="4e22ab00-540b-468e-8ff9-9bbc95c92278")> = <bound method BasePage.find_element of <web_pages.LoginPage.LoginPage object at 0x0000000004613400>>(*('id', 'logonBt'))
+E            +    where <bound method BasePage.find_element of <web_pages.LoginPage.LoginPage object at 0x0000000004613400>> = <web_pages.LoginPage.LoginPage object at 0x0000000004613400>.find_element
+E            +    and   ('id', 'logonBt') = <web_pages.LoginPage.LoginPage object at 0x0000000004613400>.login_submit_loc
+
+web_cases\test_web_login.py:73: AssertionError
+__________________ TestLogin.test_login[用户名与密码匹配时测试web登陆成功] ___________________
+
+self = <test_web_login.TestLogin object at 0x0000000004772280>
+login_page = <web_pages.LoginPage.LoginPage object at 0x0000000004613400>
+case = '用户名与密码匹配时测试web登陆成功', data = {'password': 'admin', 'username': 'gaokang'}
+expect = {'labelname': 'navigation_txt', 'labelstr': '导航'}
+
+    @pytest.mark.demo
+    @allure.feature("登录页面")
+    @allure.story("web登陆测试")
+    @pytest.mark.parametrize('case, data, expect', login_datas, ids=login_ids)
+    def test_login(self, login_page, case, data, expect):
+        """测试web登陆页面用户登陆"""
+        if getattr(FailedCase, 'test_open_url', False):
+            pytest.skip('test_open_url执行失败或被跳过，web网页打开失败，此用例跳过！')
+        login_page, ele_dict = login_page
+        with allure.step("step1：获取测试的用户名和密码"):
+            username = data['username']
+            password = data['password']
+        with allure.step("step2：输入用户名"):
+            if username:
+                login_page.input_username(username)
+            else:
+                login_page.find_element(*login_page.user_loc).clear()
+        with allure.step("step3：输入密码"):
+            if password:
+                login_page.input_password(password)
+            else:
+                login_page.find_element(*login_page.passw_loc).clear()
+        with allure.step("step4：点击登陆按钮"):
+            login_page.login_submit()
+        # label_ele = ele_dict[expect['labelname']]
+        # label_str = login_page.tab_txt(label_ele)
+        # expect_str = expect['labelstr']
+        # assert label_str == expect_str, f'预期登陆时提示为{expect_str}，实际提示为{label_str}'
+        with allure.step("step5：验证登陆结果符合预期"):
+>           check_ele_info(login_page, ele_dict, expect, assert_type='equal', assert_tip=None)
+
+web_cases\test_web_login.py:152: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+cur_page = <web_pages.LoginPage.LoginPage object at 0x0000000004613400>
+ele_dict = {'copyright_loc': ('id', 'copyright'), 'logtip_txt': ('id', 'logTip'), 'navigation_txt': ('xpath', '//*[@class="x-tab-strip-text icon_navigation"]'), 'switch_language_loc': ('id', 'language')}
+expect = {'labelname': 'navigation_txt', 'labelstr': '导航'}
+assert_type = 'equal', assert_tip = '预期元素的text为"导航"，实际为"None"'
+
+    @allure.step('检测相应元素的文本信息正确')
+    def check_ele_info(cur_page, ele_dict, expect, assert_type='in', assert_tip=None):
+        label_ele = ele_dict[expect['labelname']]
+        label_str = cur_page.tab_txt(label_ele)
+        expect_str = expect['labelstr']
+        if not assert_tip:
+            if assert_type == 'equal':
+                assert_tip = f'预期元素的text为"{expect_str}"，实际为"{label_str}"'
+            else:
+                assert_tip = f'预期元素的text--"{expect_str}"中存在字符--"{label_str}"'
+        if assert_type == 'equal':
+>           assert expect_str == label_str, assert_tip
+E           AssertionError: 预期元素的text为"导航"，实际为"None"
+
+utils\web_assert.py:25: AssertionError
+============= 2 failed, 7 passed, 75 skipped in 60.49s (0:01:00) ==============
+
+
