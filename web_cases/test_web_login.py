@@ -35,10 +35,11 @@ def forcewait(login_page):
     login_page.force_wait(2)
 
 
+@allure.feature("登录页面")
 class TestLogin(object):
 
-    @allure.feature("登录页面")
     @allure.story("web网页成功打开")
+    @allure.severity("blocker")
     @pytest.mark.demo
     @pytest.mark.parametrize('case, data, expect', open_url_datas, ids=open_url_ids)
     def test_open_url(self, login_page, case, data, expect):
@@ -54,8 +55,9 @@ class TestLogin(object):
             assert login_page.page_title in web_title, f"打开网页失败 {login_page.base_url}," \
                 f"期望page_title为'{login_page.page_title}'，实际page_title为'{web_title}'"
 
-    @allure.feature("登录页面")
     @allure.story("关于web链接成功打开与关闭")
+    @allure.title("test_about_web[关于web系统正常打开关闭]")
+    @allure.severity("minor")
     def test_about_web(self, login_page):
         """测试web登陆页面中关于web系统正常开关"""
         if getattr(FailedCase, 'test_open_url', False):
@@ -69,11 +71,12 @@ class TestLogin(object):
         with allure.step("step3：关闭关于web窗口"):
             login_page.about_close()
         with allure.step("step4：验证关于web信息框被关闭"):
-            # assert login_page.find_element(*login_page.login_submit_loc) is not None, 'about信息框未被成功关闭'
-            assert login_page.find_element(*login_page.login_submit_loc) is None, 'about信息框未被成功关闭'
+            assert login_page.find_element(*login_page.login_submit_loc) is not None, 'about信息框未被成功关闭'
+            # assert login_page.find_element(*login_page.login_submit_loc) is None, 'about信息框未被成功关闭'
 
-    @allure.feature("登录页面")
     @allure.story("用户许可协议链接成功打开与关闭")
+    @allure.title("test_user_license[用户许可协议正常打开关闭]")
+    @allure.severity("minor")
     def test_user_license(self, login_page):
         """测试web登陆页面用户许可协议正常开关"""
         if getattr(FailedCase, 'test_about_web', False):
@@ -105,8 +108,8 @@ class TestLogin(object):
     #     expect_str = expect['labelstr']
     #     assert expect_str in label_str, f'验证copyright {label_str}中存在{expect_str}'
 
-    @allure.feature("登录页面")
     @allure.story("web语言进行切换")
+    @allure.severity("critical")
     @pytest.mark.parametrize('case, data, expect', switch_language_datas, ids=switch_language_ids)
     def test_switch_language(self, login_page, case, data, expect):
         """测试web页面中英文正常切换"""
@@ -121,8 +124,8 @@ class TestLogin(object):
             check_ele_info(login_page, ele_dict, expect, assert_type='in', assert_tip=None)
 
     @pytest.mark.demo
-    @allure.feature("登录页面")
     @allure.story("web登陆测试")
+    @allure.severity("critical")
     @pytest.mark.parametrize('case, data, expect', login_datas, ids=login_ids)
     def test_login(self, login_page, case, data, expect):
         """测试web登陆页面用户登陆"""

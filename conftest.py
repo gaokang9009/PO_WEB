@@ -14,6 +14,7 @@ import time
 import pytest
 import utils
 import allure
+from _pytest import terminal
 from utils import commlib
 from selenium import webdriver
 from web_pages.LoginPage import LoginPage
@@ -177,6 +178,21 @@ def pytest_runtest_makereport(item, call):
         if 'web登陆成功' not in case_name:
             case_name = re.sub(r'\[.*\]', '', report.nodeid.split('::')[-1])
         setattr(FailedCase, case_name, True)
+
+
+# def pytest_terminal_summary(terminalreporter, existstatus, config):
+#     """
+#     调用结果统计
+#     """
+#     total = terminalreporter.stats
+#     print("total:", terminalreporter._numcollected)
+#     print('passed:', len(terminalreporter.stats.get('passed', [])))
+#     print('failed:', len(terminalreporter.stats.get('failed', [])))
+#     print('error:', len(terminalreporter.stats.get('error', [])))
+#     print('skipped:', len(terminalreporter.stats.get('skipped', [])))
+#     # terminalreporter._sessionstarttime 会话开始时间
+#     duration = time.time() - terminalreporter._sessionstarttime
+#     print('total times:', duration, 'seconds')
 
 
 @pytest.fixture(scope='class')

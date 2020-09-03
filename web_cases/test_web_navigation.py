@@ -36,6 +36,7 @@ class TestNavigation(object):
 
     @allure.feature("导航页面")
     @allure.story("各功能页面成功打开")
+    @allure.severity("normal")
     @pytest.mark.parametrize('case, data, expect', navidata_datas, ids=navidata_ids)
     def test_navigation_tab(self, navigation_page, case, data, expect):
         """测试web导航页面中各模块能够打开和关闭"""
@@ -57,6 +58,7 @@ class TestNavigation(object):
     @pytest.mark.demo
     @allure.feature("导航页面")
     @allure.story("导航页面中高级菜单切换")
+    @allure.severity("blocker")
     @pytest.mark.parametrize('case, data, expect', navigation_switch_datas, ids=navigation_switch_ids)
     def test_navigation_switch(self, navigation_page, case, data, expect):
         """测试web导航页面中高级菜单切换"""

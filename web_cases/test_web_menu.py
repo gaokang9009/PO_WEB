@@ -38,6 +38,7 @@ class TestMenu(object):
 
     @allure.feature("功能菜单页面")
     @allure.story("各功能页面成功打开")
+    @allure.severity("normal")
     @pytest.mark.parametrize('data', menudata_datas, ids=menudata_ids)
     def test_menu(self, menu_page, data):
         """测试web menu中各模块能够打开和关闭"""
