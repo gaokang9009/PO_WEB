@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('Git Pull') {
       steps {
-        git(url: 'ssh://git@github.com:gaokang9009/PO_WEB.git', branch: 'master')
+        git(url: 'https://github.com/gaokang9009/PO_WEB.git', branch: 'master')
       }
     }
 
