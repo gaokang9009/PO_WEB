@@ -9,7 +9,8 @@ Project description：
 """
 
 import allure
-from pytest import assume
+# from pytest import assume
+from pytest_assume.plugin import assume
 import pytest
 from utils import commlib
 from web_pages.NavigationPage import NavigationPage

@@ -58,13 +58,9 @@ class BasePage(object):
             # WebDriverWait(self.driver, 10).until(lambda driver: driver.find_element(*loc).is_displayed())
             WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(loc))
             ele = self.driver.find_element(*loc)
-        except TimeoutException:
-            shot_path = utils.SCREENSHOTPATH
-            if not os.path.exists(shot_path):
-                os.makedirs(shot_path)
-            file_name = os.path.join(shot_path, 'find_ele_fail_' + loc[1] + time.strftime('%Y%m%d%H%M%S') + '.png')
-            self.driver.save_screenshot(file_name)
-            print(f'定位方式 {loc[0]}->{loc[1]} 的元素未找到!')
+        except Exception as e:
+            self.save_screenshot(loc[0])
+            print(f'定位方式 {loc[0]}->{loc[1]} 的元素未找到! {e}')
             ele = None
         return ele
 
@@ -74,14 +70,19 @@ class BasePage(object):
             WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(loc))
             ele = self.driver.find_elements(*loc)
         except TimeoutException:
-            shot_path = utils.SCREENSHOTPATH
-            if not os.path.exists(shot_path):
-                os.makedirs(shot_path)
-            file_name = os.path.join(shot_path, 'find_ele_fail_' + loc[1] + time.strftime('%Y%m%d%H%M%S') + '.png')
-            self.driver.save_screenshot(file_name)
+            self.save_screenshot(loc[0])
             print(f'定位方式 {loc[0]}->{loc[1]} 的元素未找到!')
             ele = None
         return ele
+
+    def save_screenshot(self, filename):
+        shot_path = utils.SCREENSHOTPATH
+        if not os.path.exists(shot_path):
+            os.makedirs(shot_path)
+        # 图片名称：模块名-页面名-函数名-年月日时分秒.png
+        file_name = os.path.join(shot_path, 'find_ele_fail_' + filename + time.strftime('%Y%m%d%H%M%S') + '.png')
+        self.driver.save_screenshot(file_name)
+        print(f"成功获取截图，路径：{file_name}")
 
     def ele_send_keys(self, loc, value, clear_first=True, click_first=True):
         if self.find_element(*loc):

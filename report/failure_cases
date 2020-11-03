@@ -1,3 +1,5 @@
-Failure cases(2020-09-03_16:16:28):
+Failure cases(2020-11-03_18:23:32):
 
 web_cases/test_web_login.py::TestLogin::test_login[用户名与密码匹配时测试web登陆成功],具体参数为:({'username': 'gaokang', 'password': 'admin'}),result: call failed! 
+web_cases/test_web_navigation.py::TestNavigation::test_navigation_switch[验证导航页面能够切换到高级菜单],result: call skipped! 
+web_cases/test_web_navigation.py::TestNavigation::test_navigation_switch[验证高级菜单能够切换到导航页面],result: call skipped! 

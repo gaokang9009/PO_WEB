@@ -153,6 +153,8 @@ def pytest_runtest_makereport(item, call):
         ResultStatistics.all += 1
         if report.outcome == 'skipped':
             result_statistics['skipped'] += 1
+            with open(failure_cases, mode='a') as f:
+                f.write(report.nodeid + ',result: call skipped! ' + "\n")
     if report.when == "call":
         if report.outcome == 'passed':
             result_statistics['passed'] += 1

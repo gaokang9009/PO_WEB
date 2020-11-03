@@ -1,39 +1,39 @@
-Result of CMD(2020-08-31_19:36:28):
+Result of CMD(2020-11-03_18:23:28):
 
-pytest E:\CompanyDevice\PO_WEB\web_cases --alluredir E:\CompanyDevice\PO_WEB\report\allure_result --clean-alluredir
+pytest -m demo E:\CompanyDevice\PO_WEB\web_cases --alluredir E:\CompanyDevice\PO_WEB\report\allure_result --clean-alluredir
 
 ============================= test session starts =============================
 platform win32 -- Python 3.8.0, pytest-5.3.1, py-1.8.0, pluggy-0.13.1 -- d:\python38\python.exe
 cachedir: .pytest_cache
-metadata: {'Python': '3.8.0', 'Platform': 'Windows-7-6.1.7601-SP1', 'Packages': {'pytest': '5.3.1', 'py': '1.8.0', 'pluggy': '0.13.1'}, 'auther': 'ygaokang', 'version': 'v1.0', 'Plugins': {'allure-pytest': '2.8.16', 'assume': '2.2.1', 'html': '2.1.1', 'metadata': '1.9.0', 'ordering': '0.6', 'repeat': '0.8.0', 'rerunfailures': '9.0', 'sugar': '0.9.4', 'timeout': '1.4.2'}, 'JAVA_HOME': 'D:\\Program Files\\Java\\jdk1.8.0_231'}
+metadata: {'Python': '3.8.0', 'Platform': 'Windows-7-6.1.7601-SP1', 'Packages': {'pytest': '5.3.1', 'py': '1.8.0', 'pluggy': '0.13.1'}, 'auther': 'GaoKang', 'version': 'V1.0', 'Plugins': {'allure-pytest': '2.8.16', 'assume': '2.2.1', 'html': '2.1.1', 'metadata': '1.9.0', 'ordering': '0.6', 'repeat': '0.8.0', 'rerunfailures': '9.0', 'sugar': '0.9.4', 'timeout': '1.4.2'}, 'JAVA_HOME': 'D:\\Program Files\\Java\\jdk1.8.0_231'}
 rootdir: E:\CompanyDevice\PO_WEB, inifile: pytest.ini
 plugins: allure-pytest-2.8.16, assume-2.2.1, html-2.1.1, metadata-1.9.0, ordering-0.6, repeat-0.8.0, rerunfailures-9.0, sugar-0.9.4, timeout-1.4.2
-collecting ... collected 10 items
+collecting ... collected 84 items / 76 deselected / 8 selected
 
 web_cases/test_web_login.py::TestLogin::test_open_url[测试web页面能够正常打开] base_info 的 base_url是http://120.0.60.7/!
 PASSED
-web_cases/test_web_login.py::TestLogin::test_about_web PASSED
-web_cases/test_web_login.py::TestLogin::test_user_license PASSED
-web_cases/test_web_login.py::TestLogin::test_switch_language[测试中文web切英文页面] PASSED
-web_cases/test_web_login.py::TestLogin::test_switch_language[测试英文web切中文页面] PASSED
 web_cases/test_web_login.py::TestLogin::test_login[用户名和密码为空时测试web登陆失败] PASSED
 web_cases/test_web_login.py::TestLogin::test_login[用户名存在且密码为空时测试web登陆失败] PASSED
 web_cases/test_web_login.py::TestLogin::test_login[用户名为空且密码存在时测试web登陆失败] PASSED
 web_cases/test_web_login.py::TestLogin::test_login[用户名与密码不匹配时测试web登陆失败] PASSED
-web_cases/test_web_login.py::TestLogin::test_login[用户名与密码匹配时测试web登陆成功] 定位方式 xpath->//*[@class="x-tab-strip-text icon_navigation"] 的元素未找到!
+web_cases/test_web_login.py::TestLogin::test_login[用户名与密码匹配时测试web登陆成功] 成功获取截图，路径：E:\CompanyDevice\PO_WEB\report\screen_shot\find_ele_fail_xpath20201103182422.png
+定位方式 xpath->//*[@class="x-tab-strip-text icon_navigation"] 的元素未找到! Message: 
+
 FAILED
+web_cases/test_web_navigation.py::TestNavigation::test_navigation_switch[验证导航页面能够切换到高级菜单] SKIPPED
+web_cases/test_web_navigation.py::TestNavigation::test_navigation_switch[验证高级菜单能够切换到导航页面] SKIPPED
 
 ================================== FAILURES ===================================
 __________________ TestLogin.test_login[用户名与密码匹配时测试web登陆成功] ___________________
 
-self = <test_web_login.TestLogin object at 0x00000000045F3D90>
-login_page = <web_pages.LoginPage.LoginPage object at 0x00000000045BF340>
+self = <test_web_login.TestLogin object at 0x0000000004A2DFA0>
+login_page = <web_pages.LoginPage.LoginPage object at 0x0000000004A093D0>
 case = '用户名与密码匹配时测试web登陆成功', data = {'password': 'admin', 'username': 'gaokang'}
 expect = {'labelname': 'navigation_txt', 'labelstr': '导航'}
 
     @pytest.mark.demo
-    # @allure.feature("登录页面")
     @allure.story("web登陆测试")
+    @allure.severity("critical")
     @pytest.mark.parametrize('case, data, expect', login_datas, ids=login_ids)
     def test_login(self, login_page, case, data, expect):
         """测试web登陆页面用户登陆"""
@@ -62,10 +62,10 @@ expect = {'labelname': 'navigation_txt', 'labelstr': '导航'}
         with allure.step("step5：验证登陆结果符合预期"):
 >           check_ele_info(login_page, ele_dict, expect, assert_type='equal', assert_tip=None)
 
-web_cases\test_web_login.py:155: 
+web_cases\test_web_login.py:156: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 
-cur_page = <web_pages.LoginPage.LoginPage object at 0x00000000045BF340>
+cur_page = <web_pages.LoginPage.LoginPage object at 0x0000000004A093D0>
 ele_dict = {'copyright_loc': ('id', 'copyright'), 'logtip_txt': ('id', 'logTip'), 'navigation_txt': ('xpath', '//*[@class="x-tab-strip-text icon_navigation"]'), 'switch_language_loc': ('id', 'language')}
 expect = {'labelname': 'navigation_txt', 'labelstr': '导航'}
 assert_type = 'equal', assert_tip = '预期元素的text为"导航"，实际为"None"'
@@ -85,7 +85,7 @@ assert_type = 'equal', assert_tip = '预期元素的text为"导航"，实际为"None"'
 E           AssertionError: 预期元素的text为"导航"，实际为"None"
 
 utils\web_assert.py:25: AssertionError
-=================== 1 failed, 9 passed in 64.87s (0:01:04) ====================
+=========== 1 failed, 5 passed, 2 skipped, 76 deselected in 53.62s ============
 
 
 copy E:\CompanyDevice\PO_WEB\utils\environment.properties E:\CompanyDevice\PO_WEB\report\allure_result\environment.properties
@@ -93,8 +93,8 @@ copy E:\CompanyDevice\PO_WEB\utils\environment.properties E:\CompanyDevice\PO_WE
 已复制         1 个文件。
 
 
-allure generate E:\CompanyDevice\PO_WEB\report\allure_result -o E:\CompanyDevice\PO_WEB\report\allure_report\reports_20200831193628
+allure generate E:\CompanyDevice\PO_WEB\report\allure_result -o E:\CompanyDevice\PO_WEB\report\allure_report\reports_20201103182328
 
-Report successfully generated to E:\CompanyDevice\PO_WEB\report\allure_report\reports_20200831193628
+Report successfully generated to E:\CompanyDevice\PO_WEB\report\allure_report\reports_20201103182328
 
 

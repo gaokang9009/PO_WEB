@@ -45,7 +45,7 @@ class Config(object):
         else:
             try:
                 get_data = self.config.get(section, key)
-                # 读取config中ection下key对应的value值
+                # 读取config中section下key对应的value值
             except Exception as e:
                 print('"{}" file do not have the config which section is "{}" key is "{}", '
                       .format(self.cfg_path, section, key), e)

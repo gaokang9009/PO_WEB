@@ -10,7 +10,8 @@ Project description：
 
 import allure
 import pytest
-from pytest import assume
+# from pytest import assume
+from pytest_assume.plugin import assume
 from conftest import FailedCase
 from utils import commlib
 from utils.web_assert import *
@@ -51,7 +52,7 @@ class TestLogin(object):
             login_page.force_wait(5)
         with allure.step("step2：获取网页标题"):
             web_title = login_page.driver.title
-        with allure.step("step1：验证预期标题与实际网页标题相同"):
+        with allure.step("step3：验证预期标题与实际网页标题相同"):
             assert login_page.page_title in web_title, f"打开网页失败 {login_page.base_url}," \
                 f"期望page_title为'{login_page.page_title}'，实际page_title为'{web_title}'"
 
